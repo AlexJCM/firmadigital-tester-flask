@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+dist/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+.env
+.flaskenv
+*.pyc
+*.pyo
+env/
+env*
+*.egg
+*.egg-info/
+_mailinglist
+.cache/
+.pytest_cache/
+.idea/
+docs/_build/
+.vscode
+
+### Django ###
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+
+# Temp
+tmp*
