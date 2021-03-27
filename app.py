@@ -1,7 +1,5 @@
 import os
 from base64 import b64decode
-from datetime import datetime
-
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -9,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello, World!"
+    return "Hola mundo desde servico web rest con Flask!"
 
 
 @app.route('/rest', methods=['POST'])
@@ -21,13 +19,11 @@ def grabar_archivos_firmados():
 
     set_var_documento = request.json['nombreDocumento']
     set_var_archivo = request.json['archivo']    
-
-    fecha_actual = datetime.now().strftime('%Y%m%d%H%I%S')
-    carpeta = '/home/alexjcm/Documentos/Pasantias_Desarrollo/firmaEC/firmadigital-tester-flask/rest/tmp' + fecha_actual
+      
+    carpeta = 'static' # aqui se almacenaran todos los pdfs        
     print('documento: ', set_var_documento)
     print('carpeta: ', carpeta)
-    # print('archivo: ', set_var_archivo)
-    
+      
     if not os.path.isdir(carpeta):
         os.mkdir(carpeta)
 
@@ -40,11 +36,13 @@ def grabar_archivos_firmados():
     archivo_ok.close()
 
     # Retorno de bandera para el servicio web
+    # Restornar el valor en formato Json
     if archivo_ok:
-        return 'OK'  # Se recibió el documento
+        return jsonify({'result': 'OK'})  # Se recibió el documento
     else:
-        return 'ERROR'  # No se recibió el documento
+        return jsonify({'result': 'ERROR'})  # No se recibió el documento
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    set_var_documento = ''
+    app.run(debug=True, port=3000)

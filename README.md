@@ -10,8 +10,8 @@ pip3 install flask
 ## Despliegue
 Iniciar el servidor de desarrollo de Flask
 ```shell
-python3 rest/app.py
-# Visite: http://127.0.0.1:5000/rest
+python3 app.py
+# Visite: http://127.0.0.1:3000/rest
 ```
 
 ## Licencia
