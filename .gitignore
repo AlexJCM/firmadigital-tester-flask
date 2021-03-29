@@ -37,6 +37,9 @@ docs/_build/
 *.pot
 *.pyc
 local_settings.py
+
+# Temp
+static/
 db.sqlite3
 
 # Temp
