@@ -1,8 +1,11 @@
 import os
 from base64 import b64decode
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/static/*": {"origins": "*"}})
+#CORS(app)
 
 
 @app.route('/')
@@ -20,7 +23,7 @@ def grabar_archivos_firmados():
     set_var_documento = request.json['nombreDocumento']
     set_var_archivo = request.json['archivo']    
       
-    carpeta = 'static' # aqui se almacenaran todos los pdfs        
+    carpeta = 'static' # En esta carpeta se almacenarán todos los pdfs  firmados      
     print('documento: ', set_var_documento)
     print('carpeta: ', carpeta)
       
@@ -29,14 +32,14 @@ def grabar_archivos_firmados():
 
     ruta_destino_archivo = os.path.join(carpeta, set_var_documento)
     file_decode = b64decode(set_var_archivo, validate=True)
-    # print('file_decode: ', file_decode)
+  
     # Grabamos en el servidor
     archivo_ok = open(ruta_destino_archivo, 'wb')
     archivo_ok.write(file_decode)
     archivo_ok.close()
 
     # Retorno de bandera para el servicio web
-    # Restornar el valor en formato Json
+    # Retornar el valor en formato Json
     if archivo_ok:
         return jsonify({'result': 'OK'})  # Se recibió el documento
     else:
